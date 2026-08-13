@@ -63,74 +63,58 @@
         {% endif %}
       </div>
 
-      {% for section_name, section_value in _context.items() %}
-        {% set other_fields = ['template', 'font_size', 'font-size', 'name', 'profession', 'location', 'email', 'phone', 'linkedin', 'github'] %}
-        {% if section_name in other_fields %}
-        {% elif section_name == 'experience' %}
-          <div class="section experience">
-            <h2>Professional Experience</h2>
-            {% for job in experience %}
-              <div class="job">
-                <div class="job-header">
-                  <h3>
-                    <span class="job-title">{{ job.title }}</span>
-                    {{ separator }}
-                    <span class="job-company">{{ job.company }}</span>
-                  </h3>
-                  <p class="job-meta">
-                    {% if job.location %}<span class="job-location">{{ job.location }}</span>{% endif %}
-                    {% if job.location and job.start %}{{ separator }}{% endif %}
-                    {% if job.start %}<span class="job-dates">{{ job.start }} - {{ job.end | default('Present') }}</span>{% endif %}
-                  </p>
-                </div>
-                <div class="job-summary">
-                  {{ job.summary | markdown }}
-                </div>
-              </div>
+      <div class="section summary">
+        <h2>Summary</h2>
+        {{ summary | markdown }}
+      </div>
+
+      <div class="section skills">
+        {% for category, tags in skills.items() %}
+          <div class="skill-category">{{ category.replace('_', ' ').replace('-', ' ') | title }}</div>
+          <div class="skill-tags">
+            {% for tag in tags %}
+              <div class="skill-tag">{{ tag }}</div>
             {% endfor %}
           </div>
-        {% elif section_name == 'education' %}
-          <div class="section education">
-            <h2>Education</h2>
-            {% for edu in education %}
-              <div class="education-item">
-                <h3>
-                  <span class="education-qualification">{{ edu.qualification }}</span>
-                  {{ separator }}
-                  <span class="education-institution">{{ edu.institution }}</span>
-                </h3>
-                {% if edu.start %}<p class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</p>{% endif %}
-              </div>
-            {% endfor %}
+        {% endfor %}
+      </div>
+
+      <div class="section experience">
+        <h2>Professional Experience</h2>
+        {% for job in experience %}
+          <div class="job">
+            <div class="job-header">
+              <h3>
+                <span class="job-title">{{ job.title }}</span>
+                {{ separator }}
+                <span class="job-company">{{ job.company }}</span>
+              </h3>
+              <p class="job-meta">
+                {% if job.location %}<span class="job-location">{{ job.location }}</span>{% endif %}
+                {% if job.location and job.start %}{{ separator }}{% endif %}
+                {% if job.start %}<span class="job-dates">{{ job.start }} - {{ job.end | default('Present') }}</span>{% endif %}
+              </p>
+            </div>
+            <div class="job-summary">
+              {{ job.summary | markdown }}
+            </div>
           </div>
-        {% else %}
-          <div class="section {{ section_name.replace('_', '-') }}">
-            <h2>{{ section_name.replace('_', ' ').replace('-', ' ') | title }}</h2>
-            {% if section_value is string %}
-              {{ section_value | markdown }}
-            {% elif section_value is mapping %}
-              {% for subheading, value in section_value.items() %}
-                <h3>{{ subheading.replace('_', ' ').replace('-', ' ') | title }}</h3>
-                {% if value is string %}
-                  {{ value | markdown }}
-                {% elif value is sequence %}
-                  <ul>
-                    {% for item in value %}
-                      <li>{{ item }}</li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-              {% endfor %}
-            {% elif section_value is sequence %}
-              <ul>
-                {% for item in section_value %}
-                  <li>{{ item }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="section education">
+        <h2>Education</h2>
+        {% for edu in education %}
+          <div class="education-item">
+            <h3>
+              <span class="education-qualification">{{ edu.qualification }}</span>
+              {{ separator }}
+              <span class="education-institution">{{ edu.institution }}</span>
+            </h3>
+            {% if edu.start %}<p class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</p>{% endif %}
           </div>
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </body>
 </html>
