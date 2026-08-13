@@ -68,16 +68,18 @@
         {{ summary | markdown }}
       </div>
 
-      <div class="section skills">
+      <div class="section">
         <h2>Skills</h2>
-        {% for category, tags in skills.items() %}
-          <div class="skill-category">{{ category.replace('_', ' ').replace('-', ' ') | title }}</div>
-          <div class="skill-tags">
-            {% for tag in tags %}
-              <div class="skill-tag">{{ tag }}</div>
-            {% endfor %}
-          </div>
-        {% endfor %}
+        <div class="skills">
+          {% for category, tags in skills.items() %}
+            <div class="skill-category">{{ category.replace('_', ' ').replace('-', ' ') | title }}</div>
+            <div class="skill-tags">
+              {% for tag in tags %}
+                <div class="skill-tag">{{ tag }}</div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
 
       <div class="section experience">
