@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "luxresume"
+version = "0.1.2"
+description = "Generate ATS-friendly PDF resumes from YAML files using yamlrender"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Mizuki Hikaru"}
+]
+dependencies = [
+    "yamlrender",
+]
+
+[project.scripts]
+luxresume = "luxresume.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+luxresume = ["template.html", "styles.css"]
