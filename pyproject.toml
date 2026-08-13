@@ -20,7 +20,6 @@ classifiers = [
 dependencies = [
     "yamlrender",
 ]
-readme = "README.md"
 
 [project.scripts]
 luxresume = "luxresume.cli:main"
