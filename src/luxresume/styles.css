@@ -125,7 +125,7 @@ ul, li, p {
 .education-institution {
   font-style: italic;
 }
-.section {
+.section, .skills {
   margin-bottom: 0.5em;
 }
 .center {
