@@ -109,9 +109,11 @@
           <div class="education-item">
             <h3>
               <span class="education-qualification">{{ edu.qualification }}</span>
-              {{ separator }}
+              <br>
               <span class="education-institution">{{ edu.institution }}</span>
             </h3>
+            {% if edu.location %}<span class="education-location">{{ edu.location }}</span>{% endif %}
+            {% if edu.location and edu.start %}{{ separator }}{% endif %}
             {% if edu.start %}<p class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</p>{% endif %}
           </div>
         {% endfor %}
