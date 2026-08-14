@@ -107,10 +107,10 @@ ul, li, p {
   font-weight: normal;
   font-style: italic;
 }
-.job-meta {
+.job-meta, .education-meta {
   color: #777;
 }
-.job-meta {
+.job-meta, .education-meta {
   text-align: right;
 }
 .job:not(:last-child) {

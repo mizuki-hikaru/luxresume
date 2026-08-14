@@ -112,9 +112,11 @@
               <br/>
               <span class="education-institution">{{ edu.institution }}</span>
             </h3>
-            {% if edu.location %}<span class="education-location">{{ edu.location }}</span>{% endif %}
-            {% if edu.location and edu.start %}<br/>{% endif %}
-            {% if edu.start %}<p class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</p>{% endif %}
+            <p class="education-meta">
+              {% if edu.location %}<span class="education-location">{{ edu.location }}</span>{% endif %}
+              {% if edu.location and edu.start %}<br/>{% endif %}
+              {% if edu.start %}<span class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</span>{% endif %}
+            </p>
           </div>
         {% endfor %}
       </div>
