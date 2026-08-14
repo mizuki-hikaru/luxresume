@@ -92,7 +92,7 @@
               </h3>
               <p class="job-meta">
                 {% if job.location %}<span class="job-location">{{ job.location }}</span>{% endif %}
-                {% if job.location and job.start %}{{ separator }}{% endif %}
+                {% if job.location and job.start %}<br>{% endif %}
                 {% if job.start %}<span class="job-dates">{{ job.start }} - {{ job.end | default('Present') }}</span>{% endif %}
               </p>
             </div>
@@ -113,7 +113,7 @@
               <span class="education-institution">{{ edu.institution }}</span>
             </h3>
             {% if edu.location %}<span class="education-location">{{ edu.location }}</span>{% endif %}
-            {% if edu.location and edu.start %}{{ separator }}{% endif %}
+            {% if edu.location and edu.start %}<br>{% endif %}
             {% if edu.start %}<p class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</p>{% endif %}
           </div>
         {% endfor %}
