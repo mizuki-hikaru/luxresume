@@ -65,15 +65,7 @@
 
       <div class="section summary">
         <h2>Summary</h2>
-        {% if summary is string %}
-          {{ summary | mymarkup }}
-        {% else %}
-          <ul>
-            {% for item in summary %}
-              <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+        {{ summary | mymarkup }}
       </div>
 
       <h2>Skills</h2>
@@ -105,7 +97,15 @@
               </p>
             </div>
             <div class="job-summary">
-              {{ job.summary | mymarkup }}
+              {% if job.summary is string %}
+                {{ job.summary | mymarkup }}
+              {% else %}
+                <ul>
+                  {% for item in job.summary %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
             </div>
           </div>
         {% endfor %}
