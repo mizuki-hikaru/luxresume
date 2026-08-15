@@ -65,7 +65,15 @@
 
       <div class="section summary">
         <h2>Summary</h2>
-        {{ summary | mymarkup }}
+        {% if summary is string %}
+          {{ summary | mymarkup }}
+        {% else %}
+          <ul>
+            {% for item in summary %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       </div>
 
       <h2>Skills</h2>
