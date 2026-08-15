@@ -96,16 +96,12 @@
                 {% if job.start %}<span class="job-dates">{{ job.start }} - {{ job.end | default('Present') }}</span>{% endif %}
               </p>
             </div>
-            <div class="job-summary">
-              {% if job.summary is string %}
-                {{ job.summary | mymarkup }}
-              {% else %}
-                <ul>
-                  {% for item in job.summary %}
-                    <li>{{ item }}</li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
+            <div class="job-highlights">
+              <ul>
+                {% for highlight in job.highlights %}
+                  <li>{{ highlight }}</li>
+                {% endfor %}
+              </ul>
             </div>
           </div>
         {% endfor %}
