@@ -1,66 +1,24 @@
 <!DOCTYPE html>
 
-{% if not separator %}
-  {% set separator = '&bull;' %}
-{% endif %}
-{% set separator = separator | safe %}
-
-{% if not styles %}
-  {% set styles = 'styles.css' %}
-{% endif %}
-
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>{{ name }}</title>
     <style>
-      {% include styles %}
+      {% include 'styles.css' %}
     </style>
   </head>
   <body>
     <div class="page">
       <div class="section header">
         <h1>{{ name }}</h1>
-        {% set contact_details = [] %}
-        {% if profession %}
-          {% set contact_details = contact_details + [profession] %}
-        {% endif %}
-        {% if location %}
-          {% set contact_details = contact_details + [location] %}
-        {% endif %}
-        {% if email %}
-          {% set email = email | escape | safe %}
-          {% set email = ('<a href="mailto:' | safe) ~ email ~ ('">' | safe) ~ email ~ ('</a>' | safe) %}
-          {% set contact_details = contact_details + [email] %}
-        {% endif %}
-        {% if phone %}
-          {% set phone = phone | escape | safe %}
-          {% set phone = ('<a href="tel:' | safe) ~ (phone.replace(' ', '') | safe) ~ ('">' | safe) ~ phone ~ ('</a>' | safe) %}
-          {% set contact_details = contact_details + [phone] %}
-        {% endif %}
-        {% if linkedin %}
-          {% set linkedin = linkedin | escape | safe %}
-          {% if "https://" in linkedin %}
-            {% set linkedin = ('<a href="' | safe) ~ linkedin ~ ('">LinkedIn</a>' | safe) %}
-          {% else %}
-            {% set linkedin = ('<a href="https://linkedin.com/in/' | safe) ~ linkedin ~ ('">LinkedIn</a>' | safe) %}
-          {% endif %}
-          {% set contact_details = contact_details + [linkedin] %}
-        {% endif %}
-        {% if github %}
-          {% set github = github | escape | safe %}
-          {% if "https://" in github %}
-            {% set github = ('<a href="' | safe) ~ github ~ ('">GitHub</a>' | safe) %}
-          {% else %}
-            {% set github = ('<a href="https://github.com/' | safe) ~ github ~ ('">GitHub</a>' | safe) %}
-          {% endif %}
-          {% set contact_details = contact_details + [github] %}
-        {% endif %}
-        {% if contact_details %}
-          <p class="contact-details">
-            {{ contact_details | join((' ' | safe) ~ separator ~ (' ' | safe)) }}
-          </p>
-        {% endif %}
+        <p class="contact-details">
+          {{ profession }} &bull;
+          {{ location }} &bull;
+          <a href="mailto:{{ email }}">{{ email }}</a> &bull;
+          <a href="https://linkedin.com/in/{{ linkedin }}">LinkedIn</a> &bull;
+          <a href="https://github.com/{{ github }}">GitHub</a>
+        </p>
       </div>
 
       <div class="section summary">
@@ -93,7 +51,7 @@
               <p class="job-meta">
                 {% if job.location %}<span class="job-location">{{ job.location }}</span>{% endif %}
                 {% if job.location and job.start %}<br/>{% endif %}
-                {% if job.start %}<span class="job-dates">{{ job.start }} - {{ job.end | default('Present') }}</span>{% endif %}
+                {% if job.start %}<span class="job-dates">{{ job.start }} - {{ job.end or 'Present' }}</span>{% endif %}
               </p>
             </div>
             <div class="job-highlights">
@@ -119,7 +77,7 @@
             <p class="education-meta">
               {% if edu.location %}<span class="education-location">{{ edu.location }}</span>{% endif %}
               {% if edu.location and edu.start %}<br/>{% endif %}
-              {% if edu.start %}<span class="education-dates">{{ edu.start }} - {{ edu.end | default('Present') }}</span>{% endif %}
+              {% if edu.start %}<span class="education-dates">{{ edu.start }} - {{ edu.end or 'Present' }}</span>{% endif %}
             </p>
           </div>
         {% endfor %}
